@@ -1,4 +1,5 @@
 <!doctype html>
+<!--suppress RequiredAttributes -->
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,7 +15,7 @@
 
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link');
+        const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
@@ -22,13 +23,14 @@
     </script>
 </head>
 <body>
+<img id="ebay-logo" src="images/ebay-tech-logo-wide-light-bgr-small.png" alt="eBay Tech Logo" title="eBay Tech Logo">
 <div class="reveal">
     <div class="slides">
         <!-- Introduction -->
         <section>
             <img data-src="images/Breaking_Down_Title.png" class="stretch">
             <small>
-                Patrick Hund | Lead Frontend Developer at eBay | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
+                Patrick Hund | Lead Frontend Developer | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
             </small>
         </section>
         <section data-background-image="images/Green_Field.png" data-background-size="contain">
@@ -98,6 +100,64 @@
         <section>
             <img class="stretch" data-src="images/Tech_Debt_Graph_With_Looping.png">
         </section>
+        <section>
+            <img data-src="images/React_Logo.png" class="stretch">
+            <aside class="notes">
+                So what does all that have to do with React?<br><br>
+                What makes React so special to me is that it is based on components. You break down your
+                application into neat little parts and work on them separately. You compose your application from
+                building blocks, like Lego bricks.
+            </aside>
+        </section>
+        <section data-background-image="images/Lego_Webpage_Disassembled.png" data-background-size="contain">
+            <aside class="notes">
+                If you use React right, you can create a set of loosely coupled components, with well defined
+                purpose
+            </aside>
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Building_1.png" data-background-size="contain">
+            <aside class="notes">
+                You can use that set of building blocks to build your pages. You can work on each component
+                separately, you can even split them into independent npm packages and versionize them.
+            </aside>
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Building_2.png" data-background-size="contain">
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Building_3.png" data-background-size="contain">
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Building_4.png" data-background-size="contain">
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Assembled.png" data-background-size="contain">
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Fancy_Assembling.png" data-background-size="contain">
+            <aside class="notes">
+                If a part of your application needs to be extended or renewed, you can throw away the old
+                components and replace them with shiny, new ones. In the pre-component age, with a tightly
+                coupled, monolithic application, this was expensive and time consuming, much less now.<br><br>
+                React gives us the chance to make this dream come true, but it does not come automatically
+            </aside>
+        </section>
+
+        <section data-background-image="images/Lego_Webpage_Fancy_New_Header.png" data-background-size="contain">
+
+        </section>
+
+        <section>
+            <h3>Big Ball of Mud</h3>
+            <img class="stretch" data-src="images/Big_Ball_of_Mud.png">
+            <h4>React Component Spaghetti</h4>
+            <aside class="notes">
+                Just because you are using React doesn’t mean you a clean, well structured codebase
+                automatically. You can create a “big ball of mud" with React just as well as you can with jQuery
+                or anything else.
+            </aside>
+        </section>
     </div>
 </div>
 
@@ -105,16 +165,19 @@
 <script src="js/reveal.js"></script>
 
 <script>
-    // More info about config & dependencies:
-    // - https://github.com/hakimel/reveal.js#configuration
-    // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+        history: true,
         dependencies: [
             { src: 'plugin/markdown/marked.js' },
             { src: 'plugin/markdown/markdown.js' },
             { src: 'plugin/notes/notes.js', async: true },
+            { src: 'socket.io/socket.io.js', async: true },
+            { src: 'plugin/notes-server/client.js', async: true },
             {
-                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback() {
+                    // noinspection ES6ModulesDependencies, JSUnresolvedVariable
                     hljs.initHighlightingOnLoad();
                 }
             }

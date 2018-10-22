@@ -9,7 +9,7 @@ Tel Aviv, Israel, 4<sup>th</sup> November 2018; shortened and updated version of
 
 ## Abstract
 
-There’s magic in every new beginning. Building a new web app on a green field is every developer’s dream. A 
+There’s magic in every new beginning – building a new web app on a green field is every developer’s dream. A 
 dream that can turn into a nightmare as the codebase grows, matures and finally becomes unmanageable.
 
 React is based on the concept of components. The idea is to compose your application of independent building 
