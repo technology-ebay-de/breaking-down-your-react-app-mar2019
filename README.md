@@ -6,7 +6,7 @@
 
 Presentation for <a href="https://react-next.com">ReactNext</a>, 
 Tel Aviv, Israel, 4<sup>th</sup> November 2018; shortened and updated version of the
-<a href="https://www.meetup.com/de-DE/eBay-Europe-Technology/events/248331753/">48<sup>th</sup> eBay Tech Talk</a>, 
+<a href="https://github.com/technology-ebay-de/breaking-down-your-react-app">48<sup>th</sup> eBay Tech Talk</a>, 
 15<sup>th</sup> March 2018
 
 ### 👉 [View the slides online here](https://technology-ebay-de.github.io/breaking-down-your-react-app-nov2018/)
