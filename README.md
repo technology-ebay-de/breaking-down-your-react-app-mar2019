@@ -1,6 +1,8 @@
 ![eBay Tech Logo](https://github.com/technology-ebay-de/react-prebid/raw/master/ebay-tech-logo.png "eBay Tech Logo")
 
-# Breaking Down Your React App <br><small>November 2018 Edition</small>
+# Breaking Down Your React App
+
+### November 2018 Edition
 
 Presentation for <a href="https://react-next.com">ReactNext</a>, 
 Tel Aviv, Israel, 4<sup>th</sup> November 2018; shortened and updated version of the
