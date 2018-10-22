@@ -1,23 +1,22 @@
 {
-  "name": "reveal.js",
-  "version": "3.7.0",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
-  "main": "js/reveal.js",
+  "name": "breaking-down-your-react-app-nov2018",
+  "version": "2.0.0",
+  "description": "Presentation for ReactNext, Tel Aviv, 4th November 2018",
+  "homepage": "https://technology-ebay-de.github.io/breaking-down-your-react-app-nov2018/",
+  "main": "index.html",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
     "build": "grunt"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "Patrick Hund",
+    "email": "pahund@team.mobile.de",
+    "web": "https://ebaytech.berlin/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git@github.com:technology-ebay-de/breaking-down-your-react-app-nov2018.git"
   },
   "engines": {
     "node": ">=4.0.0"

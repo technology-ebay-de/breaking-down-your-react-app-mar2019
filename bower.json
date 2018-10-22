@@ -1,22 +1,21 @@
 {
-  "name": "reveal.js",
-  "version": "3.7.0",
+  "name": "breaking-down-your-react-app-nov2018",
+  "version": "2.0.0",
   "main": [
-    "js/reveal.js",
-    "css/reveal.css"
+    "index.html"
   ],
-  "homepage": "http://revealjs.com",
+  "homepage": "https://technology-ebay-de.github.io/breaking-down-your-react-app-nov2018/",
   "license": "MIT",
-  "description": "The HTML Presentation Framework",
+  "description": "Presentation for ReactNext, Tel Aviv, 4th November 2018",
   "authors": [
-    "Hakim El Hattab <hakim.elhattab@gmail.com>"
+    "Patrick Hund <pahund@team.mobile.de>"
   ],
   "dependencies": {
     "headjs": "~1.0.3"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git@github.com:technology-ebay-de/breaking-down-your-react-app-nov2018.git"
   },
   "ignore": [
     "**/.*",
