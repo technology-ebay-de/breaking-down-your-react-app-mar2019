@@ -1,49 +1,125 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Breaking Down Your React App</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/pahund.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <!-- Introduction -->
+        <section>
+            <img data-src="images/Breaking_Down_Title.png" class="stretch">
+            <small>
+                Patrick Hund | Lead Frontend Developer at eBay | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
+            </small>
+        </section>
+        <section data-background-image="images/Green_Field.png" data-background-size="contain">
+            <aside class="notes">
+                This is what every developer loves to have when starting a new project: a nice green field,
+                everything is possible, the magical chance to get things right this time. To use state-of-the-art
+                technology, to build something beautiful that will stand the test of time.
+                And, of course, make the customers very, very happy.
+            </aside>
+        </section>
+        <section data-background-image="images/Castle_Phase_1.png" data-background-size="contain">
+            <aside class="notes">
+                So, tadaa, our first release. It’s all good, software craftsmanship at its best. Servers running
+                smoothly, high code coverage, only a few bugs and loose ends.
+            </aside>
+        </section>
+        <section data-background-image="images/Castle_Phase_2.png" data-background-size="contain">
+            <aside class="notes">
+                So let’s add some more features. Our app is coming along great!
+            </aside>
+        </section>
+        <section data-background-image="images/Castle_Phase_3.png" data-background-size="contain">
+            <aside class="notes">
+                And some more… but what’s this? Bug rate is increasing? It’s getting harder and harder to
+                understand what’s going on in the code. We should fix that! And fix it we will! Eventually! When
+                we’re done with the next release, or perhaps the one after that, because rolling out those new
+                features is super important!
+            </aside>
+        </section>
+        <section data-background-image="images/Castle_Phase_4.png" data-background-size="contain">
+            <aside class="notes">
+                OK, now the developers are fixing some of the problems, but it’s starting to look more and more
+                like we’re just fire fighting, patching up what actually should be torn down and rebuilt from
+                scratch.<br><br>
+                In the many years I’ve been working as a software developer, I’ve seen this happen time and time
+                again. There’s nothing I’m quite as passionate about as finding ways to prevent this phenomenon
+                known as:
+            </aside>
+        </section>
+        <section data-background-image="images/Castle_Phase_4_Background.png" data-background-size="contain">
+            <h1>Software Entropy</h1>
+            <h2>Accumulation of Technical Debt</h2>
+            <aside class="notes">
+                Software Entropy.<br><br>
+                While software is actively being worked on, its complexity is constantly increasing, technical
+                debt is accumulated, the software becomes harder and harder to modify without breaking things. At
+                some point, the cost of fixing it is higher than the cost of rewriting it from scratch.
+            </aside>
+        </section>
+        <section>
+            <figure class="stretch">
+                <img data-src="images/Tech_Debt_Graph.png">
+                <figcaption>
+                    (source: <a
+                        target="_blank"
+                        href="https://www.informatik-aktuell.de/entwicklung/methoden/langlebige-architekturen-technische-schulden-erkennen-und-beseitigen.html">Dr.
+                    Carola Lilienthal</a>)
+                </figcaption>
+            </figure>
+            <aside class="notes">
+                To prevent this, you have to refactor your code base periodically. It’s not just about fixing
+                bugs, it’s about keeping your code clean, about making it consistent.<br><br>
+                It’s OK to make some debt, but you have to make sure you have recurring phases of paying off that
+                debt, lest it become too great and make cleaning up too costly.
+            </aside>
+        </section>
+        <section>
+            <img class="stretch" data-src="images/Tech_Debt_Graph_With_Looping.png">
+        </section>
+    </div>
+</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            { src: 'plugin/markdown/marked.js' },
+            { src: 'plugin/markdown/markdown.js' },
+            { src: 'plugin/notes/notes.js', async: true },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
 </html>
