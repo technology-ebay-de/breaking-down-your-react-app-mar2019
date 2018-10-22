@@ -291,7 +291,7 @@ body {
 .blue {
   color: #268bd2; }
 
-.slides section img {
+.reveal section img {
   border: 0;
   box-shadow: none;
   background: none; }
@@ -300,9 +300,80 @@ body {
   font-size: 0.5em;
   margin-top: -20px; }
 
+.reveal .white {
+  color: white; }
+
+.reveal .no-margin {
+  margin: 0; }
+
+.reveal .no-margin-bottom {
+  margin-bottom: 0; }
+
+.reveal .no-margin-top {
+  margin-top: 0; }
+
+.reveal .pull-up {
+  margin-top: -1rem; }
+
+.reveal img.small {
+  width: 50%;
+  height: 50%; }
+
+.reveal .box-shadow {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+.reveal .margin-right {
+  margin-right: 0.5rem; }
+
+.reveal .large-margin-top {
+  margin-top: 6rem; }
+
+.reveal .margin-top {
+  margin-top: 3rem; }
+
+.reveal .red {
+  color: darkred; }
+
+.reveal .green {
+  color: darkgreen; }
+
+.reveal section.smaller-text {
+  font-size: 80%; }
+
+.reveal .PH_TODO {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  background-color: lime;
+  border-radius: 15px;
+  padding: 15px; }
+
+.reveal .bottom-right {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end; }
+
+.reveal figcaption {
+  font-size: 0.5em;
+  margin-top: -20px; }
+
+.reveal .credits {
+  font-size: 66%; }
+
+.reveal .credits p {
+  margin: 0; }
+
+.reveal .credits .name {
+  color: #d33682; }
+
+.reveal .credits .function {
+  font-size: 66%;
+  opacity: 0.4; }
+
+.reveal .left-align {
+  text-align: left; }
+
 #ebay-logo {
   position: absolute;
   z-index: 1000;
-  left: 10px;
-  top: 10px;
-  width: 10vw; }
+  left: 12px;
+  top: 12px;
+  width: 15vw; }

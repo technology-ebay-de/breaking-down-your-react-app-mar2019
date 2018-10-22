@@ -1,3 +1,5 @@
+![eBay Tech Logo](https://github.com/technology-ebay-de/react-prebid/raw/master/ebay-tech-logo.png "eBay Tech Logo")
+
 # Breaking Down Your React App <br><small>November 2018 Edition</small>
 
 Presentation for <a href="https://react-next.com">ReactNext</a>, 
