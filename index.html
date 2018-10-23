@@ -33,9 +33,13 @@
             <small>
                 Patrick Hund | Lead Frontend Developer | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a>
             </small>
+            <aside class="notes">
+                Hi everyone, my name is Patrick. I work at eBay in Berlin.
+            </aside>
         </section>
         <section data-background-image="images/Green_Field.png" data-background-size="contain">
             <aside class="notes">
+                Can anyone tell me what this is?<br><br>
                 This is what every developer loves to have when starting a new project: a nice green field,
                 everything is possible, the magical chance to get things right this time. To use state-of-the-art
                 technology, to build something beautiful that will stand the test of time.
@@ -100,6 +104,10 @@
         </section>
         <section>
             <img class="stretch" data-src="images/Tech_Debt_Graph_With_Looping.png">
+            <aside class="notes">
+                Otherwise you'll get to a point where the cost of maintaining your code base and adding new
+                features is so high that there is no other way than doing a full rewrite.
+            </aside>
         </section>
         <section>
             <img data-src="images/React_Logo.png" class="stretch">
@@ -113,7 +121,7 @@
         <section data-background-image="images/Lego_Webpage_Disassembled.png" data-background-size="contain">
             <aside class="notes">
                 If you use React right, you can create a set of loosely coupled components, with well defined
-                purpose
+                purpose.
             </aside>
         </section>
 
@@ -163,21 +171,63 @@
             <h2>Divide and Conquer</h2>
             <img class="stretch" data-src="images/Breaking_Down_Logo_Only.png" style="margin: -40px 0">
             <h2>Best Practices</h2>
+            <aside class="notes">
+                So what are some best practices to leverage the power of components in your React application?
+                How do you actually break down your React app?<br><br>
+                Let's do a quick recap of the most basic practices that we use at eBay, and I'm sure most
+                of you do in your work, too.
+            </aside>
         </section>
 
         <section>
             <img data-src="images/Presentational_And_Container_Components.png" class="stretch">
             <h3>Separate presentational<br>and container components</h3>
+            <aside class="notes">
+                In React, you can happily mix up your UI logic, your business logic and your JSX template
+                code. That doesn't mean you should, though – it's the shortest path to the before mentioned
+                steaming bowl of spaghetti code.<br><br>
+                Instead, you create make your presentational components “dumb” by spoon feeding them with
+                the props they should display, and you wrap them in container components, or “smart”
+                components, that prepare those props.<br><br>
+                Higher order components or render props are commonly used patterns for these. I personally
+                love to use Andrew Clarke's recompose library.
+            </aside>
         </section>
 
         <section>
             <img data-src="images/storybook-screenshot.png" class="stretch box-shadow">
             <h3>Organize presentational components<br>in a separate style guide</h3>
+            <aside class="notes">
+                Once you've separated presentational components, you can use them to create a living style
+                guid, using tools like Storybook or React Styleguidist.<br><br>
+                Here's a screenshot from the styleguide we use for our website.
+            </aside>
         </section>
 
-        <section>
+        <!--section>
             <img data-src="images/Architecture_Schema_API_and_App.png" class="stretch">
             <h3>Separate application server and API server</h3>
+        </section-->
+
+        <section>
+            <h3>Separation of Concerns</h3>
+            <figure class="stretch">
+                <img data-src="images/Separation_of_Concerns_20th_Century.png">
+                <figcaption>
+                    (source: <a target="_blank" href="http://speakerdeck.com/didoo/let-there-be-peace-on-css">Cristiano
+                    Rastelli</a>)
+                </figcaption>
+            </figure>
+            <aside class="notes">
+                So let's talk about “separation of concerns”, a term you probably remember from your computer
+                science classes, but what does it actually mean from a frontend developer's perspective?<br><br>
+                In the early days of web programming, frontend developers tended to think it means:
+                You have HTML, which is concerned with stucturing the information you display on a web page,
+                you have CSS, which is concerned with making it pretty, and you have JavaScript to make it
+                wiggle when you click on it, or whatever.<br><br>
+                But we live in the 21st century now, what some people call the component age, and there is
+                a better way to define separation of concerns:
+            </aside>
         </section>
 
         <section>
@@ -190,6 +240,9 @@
                     Rastelli</a>)
                 </figcaption>
             </figure>
+            <aside class="notes">
+
+            </aside>
         </section>
 
         <section>
@@ -212,9 +265,9 @@
             </div>
         </section>
 
-        <section>
+        <!--section>
             <img data-src="images/Fractals.png" class="stretch">
-        </section>
+        </section-->
 
         <section data-background-image="images/Lego_Webpage_Hacker_News.png" data-background-size="contain">
         </section>
