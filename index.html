@@ -204,6 +204,10 @@
             </aside>
         </section>
 
+        <section>
+            <div class="PH_TODO">monorepos</div>
+        </section>
+
         <!--section>
             <img data-src="images/Architecture_Schema_API_and_App.png" class="stretch">
             <h3>Separate application server and API server</h3>
@@ -241,7 +245,11 @@
                 </figcaption>
             </figure>
             <aside class="notes">
-
+                The concerns that should be separated are the features of the app, the lego bricks that I'm
+                building my app of, each containing their own HTML, CSS and JavaScript<br><br>
+                Although, with React, the graphic perhaps should look more like this (<em>click right graph</em>)<br><br>
+                At this point I have to admit I stepped into the trap of this old school way of thinking
+                of separating concerns not by feature, but by type of tool. Let me show you what I mean.
             </aside>
         </section>
 
@@ -263,6 +271,34 @@
                     </div>
                 </div>
             </div>
+            <aside class="notes">
+                This is how we organized the JavaScript modules of our app at first
+                (<em>click left box</em>). As you can see, we are using Redux, so we created directories
+                for our presentational components, our containers, our actions, our reducers and selectors,
+                all nicely sorted by module type, and at the root, one source and one test directory for
+                unit tests, which has the same structure as the source directory<br><br>
+                This is basically the same way of organizing things in the old days, when separation of concerns
+                meant separating HTML, CSS and JavaScript.<br><br>
+                It's OK for a small app, but as the codebase grows, you wind up with directories with
+                hundreds of modules. <br><br>
+                My colleagues and I got together and discussed a better way to organize our code, this is
+                what we came up with: (<em>click right box</em>)<br><br>
+                We put each feature of our website in its own directory, so in this example taken from our
+                discussion forum, we have one directory for a feature that displays a list of discussion boards,
+                and another one for a feature that displays a list of discussion threads within a board.
+                Each has its own components, reducers, actions, and so one, and each directory has its
+                own index.js file that defines a clear interface to the parent application that uses the feature.<br><br>
+                This was the first step on our journey to achieving properly decoupled modules. Or should me
+                even call them modules? That term is already used for many, many things, so we came up with
+                our own term to call them:
+            </aside>
+        </section>
+        <section>
+            <h1>Bricks</h1>
+            <img class="stretch" data-src="images/Breaking_Down_Logo_Only.png" style="margin: -40px 0">
+            <aside class="notes">
+                Bricks – the building blocks of our web applications, like putting Lego bricks together.
+            </aside>
         </section>
 
         <!--section>
@@ -270,6 +306,12 @@
         </section-->
 
         <section data-background-image="images/Lego_Webpage_Hacker_News.png" data-background-size="contain">
+            <aside class="notes">
+                It's about time to get more practical and show some actual code. I'll use an example brick
+                I've made throughout the rest of my talk. It shows the latest headlines from Hacker News.
+                My Hacker News brick is a little application within my main application that uses Redux to
+                display some data to the user.
+            </aside>
         </section>
 
         <section>
@@ -277,7 +319,19 @@
                 <source data-src="images/Redux_Movie.mp4" type="video/mp4"/>
             </video>
             <aside class="notes">
-                If you like, image hearing the Benny Hill Show running music here
+                For those who are not familiar with how Redux works, let's do a quick recap:
+                (<em>start video</em>)<br><br>
+                The container component gets a prop “top stories” from the Redux state.
+                Except it doesn't, top stories is null at this point.<br><br>
+                So the container renders a spinner on the webpage and dispatches an action to start
+                loading the top stories.<br><br>
+                Data loading is a side effect which happens asynchronously, this is handled by a saga,
+                which gets triggered by the action. It fetches the data from the Hacker News API
+                and then dispatches another action with the data as payload<br><br>
+                This is picked up by the reducer, which produces a new version of the Redux state
+                with the data.<br><br>
+                The container is connected to the state and reacts to the state change by
+                replacing the spinner component with the presentational component that displays the data.
             </aside>
         </section>
 
