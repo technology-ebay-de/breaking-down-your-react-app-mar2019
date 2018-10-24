@@ -218,3 +218,7 @@ $selectionBackgroundColor: $magenta;
 .reveal .column-one-half {
     flex: 1 1 50%;
 }
+
+.reveal .nocaps {
+    text-transform: none;
+}

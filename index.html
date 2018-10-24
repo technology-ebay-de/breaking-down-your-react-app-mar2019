@@ -344,13 +344,14 @@
             </aside>
         </section>
 
-        <section>
+        <section data-transition="slide-in fade-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_0.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 <mark class="disabled">export { default as HackerNews } from './components';
 export * from './src/actions';
 export { default as reducer } from './reducer';
@@ -365,13 +366,14 @@ export { default as selectors } from './selectors';</mark>
                 that need to be integrated in the parent application.
             </aside>
         </section>
-        <section>
+        <section data-transition="fade-in fade-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_1.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 <mark>export { default as HackerNews } from './components';</mark>
 <mark class="disabled">export * from './src/actions';
 export { default as reducer } from './reducer';
@@ -386,13 +388,14 @@ export { default as selectors } from './selectors';</mark>
                 component that renders the box with the latest news.
             </aside>
         </section>
-        <section>
+        <section data-transition="fade-in fade-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_2.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 export { default as HackerNews } from './components';
 <mark>export * from './src/actions';</mark>
 <mark class="disabled">export { default as reducer } from './reducer';
@@ -408,13 +411,14 @@ export { default as selectors } from './selectors';</mark>
                 updating the Hacker News stories.
             </aside>
         </section>
-        <section>
+        <section data-transition="fade-in fade-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_3.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 export { default as HackerNews } from './components';
 export * from './src/actions';
 <mark>export { default as reducer } from './reducer';</mark>
@@ -429,13 +433,14 @@ export { default as selectors } from './selectors';</mark>
                 application.
             </aside>
         </section>
-        <section>
+        <section data-transition="fade-in fade-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_4.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 export { default as HackerNews } from './components';
 export * from './src/actions';
 export { default as reducer } from './reducer';
@@ -449,13 +454,14 @@ export { default as reducer } from './reducer';
                 are for handling side effects such as data loading through a Redux middleware.
             </aside>
         </section>
-        <section>
+        <section data-transition="fade-in slide-out">
             <div class="columns-container">
                 <div class="column-one-third" style="margin: 0 -50px 0 0">
                     <img data-src="images/Five_Stud_Lego_Brick_5.png">
                 </div>
                 <div class="column-two-thirds">
-                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+                    <h4 class="nocaps">index.js</h4>
+                    <pre class="box-shadow"><code data-trim data-noescape>
 export { default as HackerNews } from './components';
 export * from './src/actions';
 export { default as reducer } from './reducer';
@@ -472,10 +478,143 @@ export { default as saga } from './sagas';
         </section>
 
         <section>
-            <img class="stretch" data-src="images/Pretty_Lego_Castle.png">
+            <img class="stretch" data-src="images/State_And_Components.png">
+            <aside class="notes">
+                Well, there is always only one global Redux state as single source of
+                truth. This is one of the big advantages of Redux: you can look at the
+                state at any point to see exactly what's going on. Your Hacker News
+                brick has its own place in that state. If we access the state from
+                the HackerNews component directly, we'll have to make sure that
+                the path to the data in the state is always exactly the same –
+                in this case modules > hackerNews. By using selectors, we can put the
+                state of our brick anywhere, and we only have to change a single line of
+                code to do it:
+            </aside>
+        </section>
+
+        <section data-transition="slide-in fade-out">
+            <h4 class="nocaps">registerSelectors.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";
+import { selectors as hackerNews } from "@modular-toolkit/demo-module";</mark>
+
+const selectorMapping = {
+  <mark>"modules.hackerNews": hackerNews</mark>
+};
+
+<mark class="disabled">export default () => {
+  for (const [path, selectors] of Object.entries(selectorMapping)) {
+    registerSelectorsForUseWithGlobalState(path, selectors);
+  }
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                In this code snipped taken from the demo I've showed you,
+                we define the path for our bricks with a path string.
+            </aside>
+        </section>
+
+        <section data-transition="fade-in fade-out">
+            <h4 class="nocaps">registerSelectors.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";</mark>
+import { selectors as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module";
+
+const selectorMapping = {
+  <mark>"bricks.widgets.hackerNews": hackerNews</mark>
+};
+
+<mark class="disabled">export default () => {
+  for (const [path, selectors] of Object.entries(selectorMapping)) {
+    registerSelectorsForUseWithGlobalState(path, selectors);
+  }
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                In this code snipped taken from the demo I've showed you,
+                we define the path for our bricks with a path string.
+            </aside>
+        </section>
+
+        <section data-transition="fade-in fade-out">
+            <h4 class="nocaps">registerSelectors.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+import { <mark>registerSelectorsForUseWithGlobalState</mark> } from "@modular-toolkit/selectors";
+<mark class="disabled">import { selectors as hackerNews } from "@modular-toolkit/demo-module";
+
+const selectorMapping = {
+  "bricks.widgets.hackerNews": hackerNews
+};
+
+export default () => {
+  for (const [path, selectors] of Object.entries(selectorMapping)) {</mark>
+    <mark>registerSelectorsForUseWithGlobalState</mark>(path, selectors);
+  <mark class="disabled">}
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                We used a little trick to be able to do this:
+                in the registerSelectorsForUseWithGlobalState, which is
+                just eight lines of code, we store the path as a property
+                of the selector function. In the brick's container component,
+                instead of using Redux's connect function directly, we use
+                out own version which reads this path and “rebases” the
+                selectors to point to the correct part of the state.
+            </aside>
+        </section>
+
+        <section data-transition="fade-in fade-out">
+            <h4 class="nocaps">rootReducer.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { combineReducers } from "redux";</mark>
+
+import { reducer as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module";
+
+<mark class="disabled">export default combineReducers({</mark>
+  bricks: combineReducers({
+    <mark>hackerNews</mark>
+  })
+<mark class="disabled">});</mark>
+            </code></pre>
+            <aside class="notes">
+                So we've seen how to connect the Brick's selectors. To be able to
+                use the brick in our app, we have to do two more things:
+                first, add the brick's reducer to the app's reducers. We are using
+                the combineReducers function from the Redux library here to be
+                able to deep nest our reducer, and combine it with reducers from
+                other bricks, or from the parent application.
+            </aside>
+        </section>
+
+        <section data-transition="fade-in fade-out">
+            <h4 class="nocaps">configureStore.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { applyMiddleware, createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
+import reducer from "./reducer";</mark>
+import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
+
+<mark class="disabled">export default () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(reducer, applyMiddleware(sagaMiddleware));</mark>
+  sagaMiddleware.run(<mark>saga</mark>);
+  <mark class="disabled">return store;
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                The last piece of the puzzle that's missing to wire up our brick
+                is running its saga, which we do using the Redux saga middleware.
+            </aside>
+        </section>
+
+        <section data-transition="fade-in fade-out">
+
         </section>
 
         <!-- Summary, End -->
+        <section>
+            <img class="stretch" data-src="images/Pretty_Lego_Castle.png">
+        </section>
         <section>
             <h2>Thank you!</h2>
             <table class="credits">
