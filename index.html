@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/pahund.css">
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-
     <!-- Printing and PDF exports -->
     <script>
         const link = document.createElement('link');
@@ -35,6 +32,7 @@
             </small>
             <aside class="notes">
                 Hi everyone, my name is Patrick. I work at eBay in Berlin.
+                I'm very excited to be here today to talk about breaking down your React app!
             </aside>
         </section>
         <section data-background-image="images/Green_Field.png" data-background-size="contain">
@@ -204,9 +202,9 @@
             </aside>
         </section>
 
-        <section>
+        <!--section>
             <div class="PH_TODO">monorepos</div>
-        </section>
+        </section-->
 
         <!--section>
             <img data-src="images/Architecture_Schema_API_and_App.png" class="stretch">
@@ -315,6 +313,17 @@
         </section>
 
         <section>
+            <iframe data-src="https://codesandbox.io/embed/mok6364lmx?hidenavigation=1&view=preview"
+                    class="stretch box-shadow"
+                    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                    sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            <aside class="notes">
+                It looks like this. It preloads its data from the global Redux state, and when you
+                hit the “Update” button, it updates its content from the Hacker News API.
+            </aside>
+        </section>
+
+        <section>
             <video controls class="stretch">
                 <source data-src="images/Redux_Movie.mp4" type="video/mp4"/>
             </video>
@@ -332,6 +341,133 @@
                 with the data.<br><br>
                 The container is connected to the state and reacts to the state change by
                 replacing the spinner component with the presentational component that displays the data.
+            </aside>
+        </section>
+
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_0.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+<mark class="disabled">export { default as HackerNews } from './components';
+export * from './src/actions';
+export { default as reducer } from './reducer';
+export { default as saga } from './sagas';
+export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                There is a contract we have about our bricks: each brick shall have one index.js
+                file in its root directory which provides exports of the five parts of the brick
+                that need to be integrated in the parent application.
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_1.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+<mark>export { default as HackerNews } from './components';</mark>
+<mark class="disabled">export * from './src/actions';
+export { default as reducer } from './reducer';
+export { default as saga } from './sagas';
+export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                Each brick exports one main React component, which is usually a container
+                connected to the Redux store. In case of our Hacker News Brick, this is the
+                component that renders the box with the latest news.
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_2.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+export { default as HackerNews } from './components';
+<mark>export * from './src/actions';</mark>
+<mark class="disabled">export { default as reducer } from './reducer';
+export { default as saga } from './sagas';
+export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                Then each brick exports one or more action creator functions, which allow the
+                parent app – or even other bricks – to send signals to our brick to make them
+                do things. In case of our HackerNews brick, there is an action that triggers
+                updating the Hacker News stories.
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_3.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+export { default as HackerNews } from './components';
+export * from './src/actions';
+<mark>export { default as reducer } from './reducer';</mark>
+<mark class="disabled">export { default as saga } from './sagas';
+export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                Each brick has a reducer that updates the Redux state in response to actions
+                being dispatched. This reducer is combined with the reducer of the parent
+                application.
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_4.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+export { default as HackerNews } from './components';
+export * from './src/actions';
+export { default as reducer } from './reducer';
+<mark>export { default as saga } from './sagas';</mark>
+<mark class="disabled">export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                Each brick has one Redux saga that is run by the parent application. Sagas
+                are for handling side effects such as data loading through a Redux middleware.
+            </aside>
+        </section>
+        <section>
+            <div class="columns-container">
+                <div class="column-one-third" style="margin: 0 -50px 0 0">
+                    <img data-src="images/Five_Stud_Lego_Brick_5.png">
+                </div>
+                <div class="column-two-thirds">
+                    <pre class="box-shadow"><code data-trim data-noescape class="plaintext">
+export { default as HackerNews } from './components';
+export * from './src/actions';
+export { default as reducer } from './reducer';
+export { default as saga } from './sagas';
+<mark>export { default as selectors } from './selectors';</mark>
+                    </code></pre>
+                </div>
+            </div>
+            <aside class="notes">
+                Finally, each brick exports an object with selector functions that
+                are used to pick data from the Redux state. Why not just access the
+                Redux state directly?
             </aside>
         </section>
 
@@ -417,6 +553,8 @@
 
 <script>
     Reveal.initialize({
+        width: 1280,
+        height: 720,
         history: true,
         dependencies: [
             { src: 'plugin/markdown/marked.js' },
