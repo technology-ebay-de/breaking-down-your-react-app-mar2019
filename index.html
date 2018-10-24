@@ -587,17 +587,17 @@ import { reducer as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module
             </aside>
         </section>
 
-        <section data-transition="fade-in fade-out">
+        <section data-transition="fade-in slide-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
 <mark class="disabled">import { applyMiddleware, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
-import reducer from "./reducer";</mark>
+import rootReducer from "./rootReducer";</mark>
 import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
 
 <mark class="disabled">export default () => {
   const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(reducer, applyMiddleware(sagaMiddleware));</mark>
+  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));</mark>
   sagaMiddleware.run(<mark>saga</mark>);
   <mark class="disabled">return store;
 };</mark>
@@ -608,7 +608,7 @@ import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
             </aside>
         </section>
 
-        <section data-transition="fade-in fade-out">
+        <section data-transition="slide-in slide-out">
             <iframe data-src="https://codesandbox.io/embed/v2137r7k7?hidenavigation=1&module=%2Fsrc%2Fpages%2Fhome%2Fcomponents%2FHomePage.js"
                     class="stretch box-shadow"
                     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -623,12 +623,131 @@ import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
 
         <section>
             <img class="stretch" data-src="images/Lego_Webpage_Assembled.png">
+            <aside class="notes">
+                So there you have it. Now we can build a large, complex platform and split it
+                up into little pieces, different developers, even different teams can work
+                independently on the bricks. They are distributed as versionized npm modules.
+                It's all good, right?
+            </aside>
+        </section>
+
+        <section>
+            <div class="columns-container">
+                <div class="column-one-half">
+                    <img data-src="images/Confused_Jackie.png">
+                </div>
+                <div class="column-one-half">
+                    <ul>
+                        <li>Complicated “wiring up” of selectors, sagas and reducers</li>
+                        <li>No code splitting</li>
+                    </ul>
+                </div>
+            </div>
+            <aside class="notes">
+                Not quite, there were two major drawbacks to our “Bricks architecture”<br><br>
+                The wiring up of selectors, sagas and selectors in multiple places in the
+                parent application is complicated and tedious. Redux is famous for requiring tons
+                of boilerplate code, but do we really have to make that even worse?<br><br>
+                The second problem is more serious: with the initialization I've just showed you,
+                we have to import everything from all the bricks at application start. For a small
+                app, that's not a problem, but for a large app, this will mean a having a huge JavaScript
+                bundle for the users to download, that contains code for parts of the website they
+                may very well never see. It would be nice to be able to use webpack's code splitting
+                feature to create many smaller bundles, for example one per page or route.
+            </aside>
+        </section>
+
+        <section>
+            <img data-src="images/Tech_Debt_Graph_No_Red.png">
+            <aside class="notes">
+                So when it was time again to take a break from building new features and
+                take care of accumulated technical debt, we got together and figured out a
+                better way to integrate our bricks.
+            </aside>
+        </section>
+
+        <section>
+            <h4 class="nocaps">configureStore.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './rootReducer';
+import hackerNews from '@modular-toolkit/demo-module';</mark>
+import { <mark>BrickManager</mark> } from '@modular-toolkit/bricks/BrickManager';
+
+<mark class="disabled">export default () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(rootReducer, sagaMiddleware);</mark>
+  const brickManager = new <mark>BrickManager</mark>({ store, reducer, sagaMiddleware });
+  <mark class="disabled">brickManager.installBricks({
+    'bricks.hackerNews': hackerNews
+  });
+  return store;
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                What we came up with is a new tool that we call the brick manager.
+                It gets initialized with the parent application's Redux store, its root reducer
+                (without any brick reducers) and the Redux saga middleware.
+            </aside>
+        </section>
+
+        <section>
+            <h4 class="nocaps">configureStore.js</h4>
+            <pre class="box-shadow"><code data-trim data-noescape>
+<mark class="disabled">import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './rootReducer';</mark>
+import <mark>hackerNews</mark> from '@modular-toolkit/demo-module';
+<mark class="disabled">import { BrickManager } from '@modular-toolkit/bricks/BrickManager';
+
+export default () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(rootReducer, sagaMiddleware);
+  const brickManager = new BrickManager({ store, reducer, sagaMiddleware });</mark>
+  brickManager.installBricks({
+    'bricks.hackerNews': <mark>hackerNews</mark>
+  });
+  <mark class="disabled">return store;
+};</mark>
+            </code></pre>
+            <aside class="notes">
+                Instead of exporting reducer, saga and selectors separately from the brick,
+                we now have a default export that gives us an object with these. We can
+                pass this to the brick manager's install brick method to, well, install the
+                brick. And the nice thing is, this doesn't necessarily have to happen in
+                the configure store module, it can be anywhere in our app, at any time.
+                I can't wait to use the new React lazy feature with this, which is now available
+                with version 16.6!
+            </aside>
         </section>
 
         <!-- Summary, End -->
         <section>
             <img class="stretch" data-src="images/Pretty_Lego_Castle.png">
+            <aside class="notes">
+                So this is how we build our beautiful Lego brick castles at eBay.
+                I hope it was an inspiration to you to always go that one step further,
+                to break down your React app and battle code entropy and technical debt!
+            </aside>
         </section>
+
+        <section>
+            <img style="height: 33vh" data-src="images/Shameless_Plug.png">
+            <p>
+                <a href="https://github.com/technology-ebay-de/modular-toolkit">github.com/technology-ebay-de/modular-toolkit</a>
+            </p>
+            <code data-noescape data-trim>
+npm install --save <mark>@modular-toolkit</mark>/bricks
+            </code>
+            <aside class="notes">
+                One last thing: if you're interested in using the bricks system we've created
+                in your own application, we have an open source library for you. It's
+                called modular-toolkit and contains the brick manager I've shown you,
+                along with some other useful tools and a demo that shows how to put it all together.
+            </aside>
+        </section>
+
         <section>
             <h2>Thank you!</h2>
             <table class="credits">
@@ -691,12 +810,15 @@ import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
                 </tr>
             </table>
             <p>
-                View this presentation online: <a target="_blank" href="http://bit.ly/break-react">bit.ly/break-react</a>
+                View this presentation online: <a target="_blank" href="http://bit.ly/breakdownreact">http://bit.ly/breakdownreact</a>
             </p>
             <p class="small">
                 Patrick Hund | Lead Frontend Developer | <a target="_blank" href="https://twitter.com/wiekatz">@wiekatz</a><br>
                 Copyright © 2018 mobile.de GmbH
             </p>
+            <aside class="notes">
+                That's it from me, thank you for listening, and a special thank you to my team at eBay!
+            </aside>
         </section>
     </div>
 </div>
