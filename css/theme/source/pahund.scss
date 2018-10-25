@@ -187,19 +187,9 @@ $selectionBackgroundColor: $magenta;
     width: 15vw;
 }
 
-.reveal code {
-    color: $base3;
-    background-color: $base02;
-}
-
-.reveal code mark {
-    color: $base3;
+.reveal code mark, .reveal code mark > * {
+    color: $base3 !important;
     background-color: $magenta;
-}
-
-.reveal code mark.disabled {
-    color: $base0;
-    background: none;
 }
 
 .reveal .columns-container {

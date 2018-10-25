@@ -381,17 +381,9 @@ body {
   top: 12px;
   width: 15vw; }
 
-.reveal code {
-  color: #fdf6e3;
-  background-color: #073642; }
-
-.reveal code mark {
-  color: #fdf6e3;
+.reveal code mark, .reveal code mark > * {
+  color: #fdf6e3 !important;
   background-color: #d33682; }
-
-.reveal code mark.disabled {
-  color: #839496;
-  background: none; }
 
 .reveal .columns-container {
   align-items: center;

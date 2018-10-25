@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/pahund.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -57,7 +58,7 @@
         </section>
         <section data-background-image="images/Castle_Phase_3.png" data-background-size="contain">
             <aside class="notes">
-                And some more… but what’s this? Bug rate is increasing? It’s getting harder and harder to
+                And some more features… but what’s this? Bug rate is increasing? It’s getting harder and harder to
                 understand what’s going on in the code. We should fix that! And fix it we will! Eventually! When
                 we’re done with the next release, or perhaps the one after that, because rolling out those new
                 features is super important!
@@ -119,39 +120,55 @@
         <section data-background-image="images/Lego_Webpage_Disassembled.png" data-background-size="contain">
             <aside class="notes">
                 If you use React right, you can create a set of loosely coupled components, with well defined
-                purpose.
-            </aside>
-        </section>
-
-        <section data-background-image="images/Lego_Webpage_Building_1.png" data-background-size="contain">
-            <aside class="notes">
+                purpose.<br><br>
                 You can use that set of building blocks to build your pages. You can work on each component
                 separately, you can even split them into independent npm packages and versionize them.
             </aside>
         </section>
 
+        <section data-background-image="images/Lego_Webpage_Building_1.png" data-background-size="contain">
+            <aside class="notes">
+                So let's build our website: here's the footer…
+            </aside>
+        </section>
+
         <section data-background-image="images/Lego_Webpage_Building_2.png" data-background-size="contain">
+            <aside class="notes">
+                …here are some posts from our discussion forum…
+            </aside>
         </section>
 
         <section data-background-image="images/Lego_Webpage_Building_3.png" data-background-size="contain">
+            <aside class="notes">
+                …here's a side bar…
+            </aside>
         </section>
 
         <section data-background-image="images/Lego_Webpage_Building_4.png" data-background-size="contain">
+            <aside class="notes">
+                …a search form to search the posts…
+            </aside>
         </section>
 
         <section data-background-image="images/Lego_Webpage_Assembled.png" data-background-size="contain">
+            <aside class="notes">
+                …and a page header on top.<br><br>
+                So let's say we don't like the header anymore, it looks sooo 2017 and after all, it's 2018.
+            </aside>
         </section>
 
         <section data-background-image="images/Lego_Webpage_Fancy_Assembling.png" data-background-size="contain">
             <aside class="notes">
-                If a part of your application needs to be extended or renewed, you can throw away the old
-                components and replace them with shiny, new ones. In the pre-component age, with a tightly
-                coupled, monolithic application, this was expensive and time consuming, much less now.<br><br>
-                React gives us the chance to make this dream come true, but it does not come automatically
+                We can throw away the old heder and replace it with a shiny, new one.
             </aside>
         </section>
 
         <section data-background-image="images/Lego_Webpage_Fancy_New_Header.png" data-background-size="contain">
+            <aside class="notes">
+                In the pre-component age, with a tightly coupled, monolithic application, this was expensive
+                and time consuming, much less now.<br><br>
+                React gives us the chance to make this dream come true, but it does not come automatically
+            </aside>
         </section>
 
         <section>
@@ -159,7 +176,7 @@
             <img class="stretch" data-src="images/Big_Ball_of_Mud.png">
             <h4>React Component Spaghetti</h4>
             <aside class="notes">
-                Just because you are using React doesn’t mean you a clean, well structured codebase
+                Just because you are using React doesn't mean you have a clean, well structured codebase
                 automatically. You can create a “big ball of mud" with React just as well as you can with jQuery
                 or anything else.
             </aside>
@@ -192,6 +209,38 @@
             </aside>
         </section>
 
+        <section>
+            <pre class="box-shadow stretch"><code data-trim data-noescape>
+import { compose, withState, withHandlers, lifecycle } from 'recompose';
+import fetchData from './fetchData';
+import DumbComponent from './DumbComponent';
+
+const enhance = compose(
+  withState('data', 'setData', null),
+  withHandlers({
+    load({ setData }) {
+      return async () => {
+        setData(null);
+        const data = await fetchData();
+        setData(data);
+      };
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      this.props.load();
+    }
+  })
+);
+
+export default enhance(DumbComponent);
+            </code></pre>
+            <aside class="notes">
+                Here's a quick code example that shows how you can use Recompose to create a
+                container component that loads some data when it mounts and then passes that
+                data to a wrapped presentational component, whose only job is displaying that data.
+            </aside>
+        </section>
         <section>
             <img data-src="images/storybook-screenshot.png" class="stretch box-shadow">
             <h3>Organize presentational components<br>in a separate style guide</h3>
@@ -353,11 +402,11 @@
                 <div class="column-two-thirds">
                     <h4 class="nocaps">index.js</h4>
                     <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">export { default as HackerNews } from './components';
+export { default as HackerNews } from './components';
 export * from './actions';
 export { default as reducer } from './reducer';
 export { default as saga } from './sagas';
-export { default as selectors } from './selectors';</mark>
+export { default as selectors } from './selectors';
                     </code></pre>
                 </div>
             </div>
@@ -376,10 +425,10 @@ export { default as selectors } from './selectors';</mark>
                     <h4 class="nocaps">index.js</h4>
                     <pre class="box-shadow"><code data-trim data-noescape>
 <mark>export { default as HackerNews } from './components';</mark>
-<mark class="disabled">export * from './actions';
+export * from './actions';
 export { default as reducer } from './reducer';
 export { default as saga } from './sagas';
-export { default as selectors } from './selectors';</mark>
+export { default as selectors } from './selectors';
                     </code></pre>
                 </div>
             </div>
@@ -399,9 +448,9 @@ export { default as selectors } from './selectors';</mark>
                     <pre class="box-shadow"><code data-trim data-noescape>
 export { default as HackerNews } from './components';
 <mark>export * from './actions';</mark>
-<mark class="disabled">export { default as reducer } from './reducer';
+export { default as reducer } from './reducer';
 export { default as saga } from './sagas';
-export { default as selectors } from './selectors';</mark>
+export { default as selectors } from './selectors';
                     </code></pre>
                 </div>
             </div>
@@ -423,8 +472,8 @@ export { default as selectors } from './selectors';</mark>
 export { default as HackerNews } from './components';
 export * from './actions';
 <mark>export { default as reducer } from './reducer';</mark>
-<mark class="disabled">export { default as saga } from './sagas';
-export { default as selectors } from './selectors';</mark>
+export { default as saga } from './sagas';
+export { default as selectors } from './selectors';
                     </code></pre>
                 </div>
             </div>
@@ -446,7 +495,7 @@ export { default as HackerNews } from './components';
 export * from './actions';
 export { default as reducer } from './reducer';
 <mark>export { default as saga } from './sagas';</mark>
-<mark class="disabled">export { default as selectors } from './selectors';</mark>
+export { default as selectors } from './selectors';
                     </code></pre>
                 </div>
             </div>
@@ -496,18 +545,18 @@ export { default as saga } from './sagas';
         <section data-transition="slide-in fade-out">
             <h4 class="nocaps">registerSelectors.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";
-import { selectors as hackerNews } from "@modular-toolkit/demo-module";</mark>
+import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";
+import { selectors as hackerNews } from "@modular-toolkit/demo-module";
 
 const selectorMapping = {
   <mark>"modules.hackerNews": hackerNews</mark>
 };
 
-<mark class="disabled">export default () => {
+export default () => {
   for (const [path, selectors] of Object.entries(selectorMapping)) {
     registerSelectorsForUseWithGlobalState(path, selectors);
   }
-};</mark>
+};
             </code></pre>
             <aside class="notes">
                 In this code snipped taken from the demo I've showed you,
@@ -518,18 +567,18 @@ const selectorMapping = {
         <section data-transition="fade-in fade-out">
             <h4 class="nocaps">registerSelectors.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";</mark>
+import { registerSelectorsForUseWithGlobalState } from "@modular-toolkit/selectors";
 import { selectors as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module";
 
 const selectorMapping = {
   <mark>"bricks.widgets.hackerNews": hackerNews</mark>
 };
 
-<mark class="disabled">export default () => {
+export default () => {
   for (const [path, selectors] of Object.entries(selectorMapping)) {
     registerSelectorsForUseWithGlobalState(path, selectors);
   }
-};</mark>
+};
             </code></pre>
             <aside class="notes">
                 In this code snipped taken from the demo I've showed you,
@@ -541,21 +590,21 @@ const selectorMapping = {
             <h4 class="nocaps">registerSelectors.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
 import { <mark>registerSelectorsForUseWithGlobalState</mark> } from "@modular-toolkit/selectors";
-<mark class="disabled">import { selectors as hackerNews } from "@modular-toolkit/demo-module";
+import { selectors as hackerNews } from "@modular-toolkit/demo-module";
 
 const selectorMapping = {
   "bricks.widgets.hackerNews": hackerNews
 };
 
 export default () => {
-  for (const [path, selectors] of Object.entries(selectorMapping)) {</mark>
+  for (const [path, selectors] of Object.entries(selectorMapping)) {
     <mark>registerSelectorsForUseWithGlobalState</mark>(path, selectors);
-  <mark class="disabled">}
-};</mark>
+  }
+};
             </code></pre>
             <aside class="notes">
                 We used a little trick to be able to do this:
-                in the registerSelectorsForUseWithGlobalState, which is
+                in the registerSelectorsForUseWithGlobalState function, which is
                 just eight lines of code, we store the path as a property
                 of the selector function. In the brick's container component,
                 instead of using Redux's connect function directly, we use
@@ -567,15 +616,15 @@ export default () => {
         <section data-transition="fade-in fade-out">
             <h4 class="nocaps">rootReducer.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { combineReducers } from "redux";</mark>
+import { combineReducers } from "redux";
 
 import { reducer as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module";
 
-<mark class="disabled">export default combineReducers({</mark>
+export default combineReducers({
   bricks: combineReducers({
     <mark>hackerNews</mark>
   })
-<mark class="disabled">});</mark>
+});
             </code></pre>
             <aside class="notes">
                 So we've seen how to connect the Brick's selectors. To be able to
@@ -590,17 +639,17 @@ import { reducer as <mark>hackerNews</mark> } from "@modular-toolkit/demo-module
         <section data-transition="fade-in slide-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
-import rootReducer from "./rootReducer";</mark>
+import rootReducer from "./rootReducer";
 import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
 
-<mark class="disabled">export default () => {
+export default () => {
   const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));</mark>
+  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
   sagaMiddleware.run(<mark>saga</mark>);
-  <mark class="disabled">return store;
-};</mark>
+  return store;
+};
             </code></pre>
             <aside class="notes">
                 The last piece of the puzzle that's missing to wire up our brick
@@ -669,21 +718,21 @@ import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
         <section data-transition="slide-in fade-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './rootReducer';
-import hackerNews from '@modular-toolkit/demo-module';</mark>
+import hackerNews from '@modular-toolkit/demo-module';
 import { <mark>BrickManager</mark> } from '@modular-toolkit/bricks/BrickManager';
 
-<mark class="disabled">export default () => {
+export default () => {
   const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(rootReducer, sagaMiddleware);</mark>
+  const store = createStore(rootReducer, sagaMiddleware);
   const brickManager = new <mark>BrickManager</mark>({ store, reducer, sagaMiddleware });
-  <mark class="disabled">brickManager.installBricks({
+  brickManager.installBricks({
     'bricks.hackerNews': hackerNews
   });
   return store;
-};</mark>
+};
             </code></pre>
             <aside class="notes">
                 What we came up with is a new tool that we call the brick manager.
@@ -695,21 +744,21 @@ import { <mark>BrickManager</mark> } from '@modular-toolkit/bricks/BrickManager'
         <section data-transition="fade-in slide-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
-<mark class="disabled">import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './rootReducer';</mark>
+import rootReducer from './rootReducer';
 import <mark>hackerNews</mark> from '@modular-toolkit/demo-module';
-<mark class="disabled">import { BrickManager } from '@modular-toolkit/bricks/BrickManager';
+import { BrickManager } from '@modular-toolkit/bricks/BrickManager';
 
 export default () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(rootReducer, sagaMiddleware);
-  const brickManager = new BrickManager({ store, reducer, sagaMiddleware });</mark>
+  const brickManager = new BrickManager({ store, reducer, sagaMiddleware });
   brickManager.installBricks({
     'bricks.hackerNews': <mark>hackerNews</mark>
   });
-  <mark class="disabled">return store;
-};</mark>
+  return store;
+};
             </code></pre>
             <aside class="notes">
                 Instead of exporting reducer, saga and selectors separately from the brick,
@@ -726,10 +775,12 @@ export default () => {
                     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
                     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
             <aside class="notes">
+                Remember the Recomposed container component I've showed you earlier?
+                This is where Recompose really shine:<br><br>
                 In this version of my demo, I've created a context provider that gives me access
                 to the bricks manager anywhere in my application. This way, I can use a higher order
                 component to simply plug in my brick anywhere, like this
-                (<em>add withBricks in container and Gists component in page component</em>.
+                (<em>add withBricks in container and Gists component in page component</em>)
             </aside>
         </section>
 
