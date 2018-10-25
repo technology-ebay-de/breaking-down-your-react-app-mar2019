@@ -400,3 +400,6 @@ body {
 
 .reveal .nocaps {
   text-transform: none; }
+
+.reveal aside.notes {
+  font-size: 80%; }

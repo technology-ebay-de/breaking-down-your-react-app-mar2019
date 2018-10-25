@@ -776,11 +776,24 @@ export default () => {
                     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
             <aside class="notes">
                 Remember the Recomposed container component I've showed you earlier?
-                This is where Recompose really shine:<br><br>
+                This is where Recompose really shines:<br><br>
                 In this version of my demo, I've created a context provider that gives me access
                 to the bricks manager anywhere in my application. This way, I can use a higher order
                 component to simply plug in my brick anywhere, like this
                 (<em>add withBricks in container and Gists component in page component</em>)
+            </aside>
+        </section>
+
+        <section data-transition="slide-in slide-out">
+            <iframe data-src="https://codesandbox.io/embed/04xrv2zwwv?module=%2Fsrc%2Fpages%2Fgists%2Fcomponents%2FGistsPageContainer.js"
+                    class="stretch box-shadow"
+                    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                    sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            <aside class="notes">
+                So, let's take this one step further and use the new React 16.6 features lazy and Suspense
+                to lazy load not only the GistsPage component, but also out brick!<br><br>
+                This way, webpack's code splitting feature will create separate bundles for all the
+                code that's used on the Gists page, including out brick, with its reducer, saga, selectors.
             </aside>
         </section>
 
