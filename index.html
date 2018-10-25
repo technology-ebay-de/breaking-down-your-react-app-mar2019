@@ -666,7 +666,7 @@ import { <mark>saga</mark> } from '@modular-toolkit/demo-module';
             </aside>
         </section>
 
-        <section>
+        <section data-transition="slide-in fade-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
 <mark class="disabled">import { applyMiddleware, createStore } from 'redux';
@@ -692,7 +692,7 @@ import { <mark>BrickManager</mark> } from '@modular-toolkit/bricks/BrickManager'
             </aside>
         </section>
 
-        <section>
+        <section data-transition="fade-in slide-out">
             <h4 class="nocaps">configureStore.js</h4>
             <pre class="box-shadow"><code data-trim data-noescape>
 <mark class="disabled">import { applyMiddleware, createStore } from 'redux';
@@ -717,8 +717,19 @@ export default () => {
                 pass this to the brick manager's install brick method to, well, install the
                 brick. And the nice thing is, this doesn't necessarily have to happen in
                 the configure store module, it can be anywhere in our app, at any time.
-                I can't wait to use the new React lazy feature with this, which is now available
-                with version 16.6!
+            </aside>
+        </section>
+
+        <section data-transition="slide-in slide-out">
+            <iframe data-src="https://codesandbox.io/embed/6175jwk3jz?module=%2Fsrc%2Fpages%2Fgists%2Fcomponents%2FGistsPageContainer.js"
+                    class="stretch box-shadow"
+                    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                    sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            <aside class="notes">
+                In this version of my demo, I've created a context provider that gives me access
+                to the bricks manager anywhere in my application. This way, I can use a higher order
+                component to simply plug in my brick anywhere, like this
+                (<em>add withBricks in container and Gists component in page component</em>.
             </aside>
         </section>
 
