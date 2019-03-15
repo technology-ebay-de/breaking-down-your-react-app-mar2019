@@ -1,8 +1,8 @@
 {
   "name": "breaking-down-your-react-app-nov2018",
   "version": "2.0.0",
-  "description": "Presentation for ReactNext, Tel Aviv, 4th November 2018",
-  "homepage": "https://technology-ebay-de.github.io/breaking-down-your-react-app-nov2018/",
+  "description": "Presentation for eBay Frontend Conference, San Jose, 25th March 2019",
+  "homepage": "https://technology-ebay-de.github.io/breaking-down-your-react-app-mar2019/",
   "main": "index.html",
   "scripts": {
     "test": "grunt test",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:technology-ebay-de/breaking-down-your-react-app-nov2018.git"
+    "url": "git@github.com:technology-ebay-de/breaking-down-your-react-app-mar2019.git"
   },
   "engines": {
     "node": ">=4.0.0"

@@ -2,14 +2,11 @@
 
 # Breaking Down Your React App
 
-### November 2018 Edition
+### March 2019 Edition
 
-Presentation for <a href="https://react-next.com">ReactNext</a>, 
-Tel Aviv, Israel, 4<sup>th</sup> November 2018; shortened and updated version of the
-<a href="https://github.com/technology-ebay-de/breaking-down-your-react-app">48<sup>th</sup> eBay Tech Talk</a>, 
-15<sup>th</sup> March 2018
+Presentation for the eBay Frontend Conference, San Jose, USA, 25<sup>th</sup> March 2019.
 
-### 👉 [View the slides online here](https://technology-ebay-de.github.io/breaking-down-your-react-app-nov2018/)
+### 👉 [View the slides online here](https://technology-ebay-de.github.io/breaking-down-your-react-app-mar2019/)
 
 ## Abstract
 
@@ -29,7 +26,7 @@ every day, too!
 
 ## About the Speaker
 
-Patrick Hund, lead frontend developer, helps React and Node.js conquer the tech stack at eBay in Berlin. 
+Patrick Hund, frontend developer and architect, helps React and Node.js conquer the tech stack at eBay in Berlin. 
 He has been a professional software developer since 2000 and joined eBay in 2010. Notable projects include 
 relaunching the homepage of eBay’s car trading platform 
 <a href="https://www.mobile.de/">mobile.de</a> in 2015 and the ongoing rewrite of mobile.de’s automotive online 
@@ -39,7 +36,7 @@ community <a href="https://www.motor-talk.de/">MOTOR-TALK.de</a> (since 2017).
 
 [MIT licensed](LICENSE)
 
-Copyright © 2018 mobile.de GmbH
+Copyright © 2019 mobile.de GmbH
 
 ## Acknowledgements
 
